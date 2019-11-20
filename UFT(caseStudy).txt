@@ -1,0 +1,214 @@
+SystemUtil.Run "C:\Program Files (x86)\HPE\Unified Functional Testing\samples\Flights Application\FlightsGUI.exe"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d25abbfdd11e0d8392c"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+'wait(20)
+If WpfWindow("HPE MyFlight Sample Applicatio").Exist(20) Then
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+else
+msgbox "window not found"
+end if
+
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d25b9fc45ea1888c5e5"
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Check CheckPoint("OK")
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+If WpfWindow("HPE MyFlight Sample Applicatio").Exist(5) Then
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+Else 
+msgbox "window not found"
+End If
+
+Browser("Welcome: Mercury Tours").Page("Welcome: Mercury Tours").Check CheckPoint("Welcome: Mercury Tours")
+Browser("Welcome: Mercury Tours").Page("Welcome: Mercury Tours").WebEdit("userName").Set "mercury"
+Browser("Welcome: Mercury Tours").Page("Welcome: Mercury Tours").WebEdit("password").SetSecure "5d25bbddaa2aeb784d6b5978d03756c7b96f2a9c"
+Browser("Welcome: Mercury Tours").Page("Welcome: Mercury Tours").Image("Sign-In").Click 19,5
+Browser("Welcome: Mercury Tours").Page("Welcome: Mercury Tours").Sync
+Browser("Welcome: Mercury Tours").CloseAllTabs
+
+'SystemUtil.Run "C:\Program Files (x86)\HPE\Unified Functional Testing\samples\Flights Application\FlightsGUI.exe"
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d25c085bf778380465e"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+fromcity = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").GetItemsCount
+'msgbox fromcity
+tocity = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").GetItemsCount
+'msgbox tocity
+c=1
+For i = 0 To fromcity-1
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select (i)
+flyfrom = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").GetROProperty("text")
+'msgbox flyfrom
+
+
+For j = 0 To tocity-1 
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select (j)
+flyto = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").GetROProperty("text")
+'msgbox flyto
+If flyfrom=flyto Then
+   msgbox("both are same")
+    DataTable.SetCurrentRow(c)
+	Datatable.Value("from") = flyfrom
+	Datatable.Value("to") = flyto
+	c=c+1
+End If
+Next
+Next
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+
+WpfWindow("HPE MyFlight Sample Applicatio").Dialog("Error").WinButton("OK").Click
+'WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,0
+'WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+'WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "ammu"
+'WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+
+
+SystemUtil.Run"C:\Program Files (x86)\HPE\Unified Functional Testing\samples\Flights Application\FlightsGUI.exe"
+WpfWindow("HPE MyFlight Sample Applicatio").Click 390,411
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").Click 164,325
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d25c9b62d0000743ef7"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select "Frankfurt"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select "Denver"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").RowCount
+rc=WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").RowCount
+Dim a,b
+
+a=""
+b=0
+For i = 0 To  rc-1
+	fn =WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").GetCellData(i,4)
+	If a = fn Then
+     b=b+1
+	End If
+Next
+If b>0 Then
+	msgbox ("Pass")
+	Reporter.ReportEvent micPass, "Status of if block", "Pass"
+	else
+	msgbox ("fail")
+	Reporter.ReportEvent micFail, "Status of else block", "Fail"
+End If
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,1
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "ammu"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d26c5fda81e864e5c0a"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select DataTable("fromcity",dtGlobalSheet)
+from = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").GetROProperty("text")
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select DataTable("tocity", dtGlobalSheet)
+too = WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").GetROProperty("text")
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+If WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").Exist(20) Then
+From_city = WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("From: Denver").Click
+From_city = WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("From: Denver").GetROProperty("Name")
+To_city = WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("To: London").Click
+To_city = WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("To: London").GetROProperty("Name")
+from = "From: "+from
+too = "To: "+too
+If from=From_city Then
+If  too=To_city Then
+		 DataTable.Value("Output") = "the flight table is correct"
+End If 
+End If
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,3
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "ammu"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+    WpfWindow("HPE MyFlight Sample Applicatio").Close
+else
+      DataTable.Value("Status") = "the flight table is not correct"
+     WpfWindow("HPE MyFlight Sample Applicatio").Close
+End If
+
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d26ea6457c1f931c9cd"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select "Paris"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select "London"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("numOfTickets").Select 4
+n=WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("numOfTickets").GetROProperty("text")
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,0
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "ammu"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("$155.47").Click 34,14
+price1=WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("$155.47").GetROProperty("text")
+WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("$621.88").Click 68,10
+totalprice=WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("$621.88").GetROProperty("text")
+
+tp=price1*n
+ta="$"+FormatNumber(tp,2)
+totalprice=totalprice*1
+Dim a
+DataTable.Value("numoftickets")=n
+DataTable.Value("total")=totalprice
+DataTable.Value("result")=ta
+DataTable.Value("price")=price1
+If tp=totalprice Then
+	a="pass"
+else
+   a="fail"
+End If
+DataTable.Value("status")=a
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d26ee4e3bc33683d9ba"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select "Paris"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select "London"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+row=WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").RowCount
+count=0
+For i = 0 To row-1
+	name=WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").GetCellData(i,4)
+	price=WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").GetCellData(i,0)
+	count=count+1
+	DataTable.SetCurrentRow(count)
+    DataTable.Value("flight_name","Action1")=name
+    DataTable.Value("flight_price","Action1")=price
+Next
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,0
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "ammu"
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("10535 AF").Click 38,8
+WpfWindow("HPE MyFlight Sample Applicatio").WpfObject("$155.47").Click 55,20
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+WpfWindow("HPE MyFlight Sample Applicatio").Close
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("agentName").Set "john"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("password").SetSecure "5d26f84e3b80715a526d"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("OK").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("fromCity").Select DataTable("fromcity",dtGlobalSheet)
+WpfWindow("HPE MyFlight Sample Applicatio").WpfComboBox("toCity").Select DataTable("tocity", dtGlobalSheet)
+WpfWindow("HPE MyFlight Sample Applicatio").WpfImage("WpfImage").Click 10,3
+WpfWindow("HPE MyFlight Sample Applicatio").WpfCalendar("datePicker").SetDate DataTable("p_Date", dtGlobalSheet)
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("FIND FLIGHTS").Click
+cellvalue=WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").RowCount
+DataTable.Value("count")=cellvalue
+
+WpfWindow("HPE MyFlight Sample Applicatio").WpfTable("flightsDataGrid").SelectCell 0,0
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("SELECT FLIGHT").Click
+WpfWindow("HPE MyFlight Sample Applicatio").WpfEdit("passengerName").Set "mallela"
+WpfWindow("HPE MyFlight Sample Applicatio").WpfButton("ORDER").Click
+WpfWindow("HPE MyFlight Sample Applicatio").Close
