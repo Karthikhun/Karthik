@@ -1,0 +1,313 @@
+Case studies of Cucumber-----------
+
+package Runner;
+
+import org.junit.runner.RunWith;
+
+import io.cucumber.junit.Cucumber;
+import io.cucumber.junit.CucumberOptions;
+
+
+
+
+@RunWith(Cucumber.class)
+@CucumberOptions(features="FEATURE\\CaseStudy1.feature",glue= {"CaseStudy"},plugin= {"html:target/Case1.html"})
+public class Script {
+
+}
+---------------------------------------------------------------
+Casestudy1 ---cucumber.java
+
+package CaseStudy;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class Casestudy1 {
+	WebDriver driver;
+	@Given("the signup page is opened")
+	public void the_signup_page_is_opened() {
+		System.setProperty("webdriver.chrome.driver","C:\\NexGen Testing Stream NEW\\Chrome Driver\\chromedriver.exe");
+		driver=new ChromeDriver();
+		String url="http://10.232.237.143:443/TestMeApp/fetchcat.htm";
+		driver.get(url);
+		driver.findElement(By.linkText("SignUp")).click();
+	   
+	}
+	@When("user enters pramodsiddd as username")
+	public void user_enters_pramodsiddd_as_username() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		driver.findElement(By.id("userName")).sendKeys("swarappupammi");
+	}
+
+	@Then("user enters gsjgdjhdj as First name")
+	public void user_enters_gsjgdjhdj_as_First_name() {
+		driver.findElement(By.id("firstName")).sendKeys("swarr");
+	}
+
+	@Then("user enters ajsghdjdjsabjab as Last name")
+	public void user_enters_ajsghdjdjsabjab_as_Last_name() {
+		  driver.findElement(By.id("lastName")).sendKeys("sapi"); 
+	}
+
+
+	@When("enters ALluArjun@{int} as password")
+	public void enters_ALluArjun_as_password(Integer int1) {
+	  driver.findElement(By.id("password")).sendKeys("wermiswar148");
+	}
+
+	@When("enters ALluArjun@{int} as password for confirmation")
+	public void enters_ALluArjun_as_password_for_confirmation(Integer int1) {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		driver.findElement(By.id("pass_confirmation")).sendKeys("wermiswar148");
+	}
+
+	@When("Select gender as male")
+	public void select_gender_as_male() {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		driver.findElement(By.xpath("/html/body/main/div/div/form/fieldset/div/div[6]/div/div/label")).click();
+	}
+	
+	@Then("enters prammoodd{int}@gmail.com as email id")
+	public void enters_prammoodd_gmail_com_as_email_id(Integer int1) {
+		driver.findElement(By.id("emailAddress")).sendKeys("pramswaru96@gmail.com");
+	}
+	
+	@Then("user enters {string} as phone number")
+	public void user_enters_as_phone_number(String string) {
+	    // Write code here that turns the phrase above into concrete actions
+	    //throw new cucumber.api.PendingException();
+		 driver.findElement(By.id("mobileNumber")).sendKeys("1234564985");
+	}
+
+	@Then("Selects {string} as his date of birth")
+	public void selects_as_his_date_of_birth(String string) {
+		 driver.findElement(By.name("dob")).sendKeys("18-10-1987");
+	}
+
+
+@Then("enters abcdef as address")
+public void enters_abcdef_as_address() {
+	driver.findElement(By.id("address")).sendKeys("abcdef");
+}
+
+@Then("selects security question as birth place")
+public void selects_security_question_as_birth_place() {
+	//driver.findElement(By.xpath("//select[@name='securityQuestion' and @value='411010']")).click();
+	  Select dropdown2 = new Select(driver.findElement(By.id("securityQuestion")));
+	  dropdown2.selectByIndex(0);
+}
+
+@Then("answers as mangalore")
+public void answers_as_mangalore() {
+	
+	driver.findElement(By.id("answer")).sendKeys("mangalore");
+}
+
+@Then("Clicks on register")
+public void clicks_on_register() {
+	 driver.findElement(By.xpath("//input[@type='submit' and @value='Register']")).click();
+  
+}
+
+@Then("User is navigated to Login Page")
+public void user_is_navigated_to_Login_Page() {
+	System.out.println("The page title is"+driver.getTitle());
+}
+
+}
+--------------------------------------------------------------------------------------------------------
+casestudy2---cucumber.java
+
+package CaseStudy;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class CaseStudy2 {
+	WebDriver driver;
+	@Given("User opens the application")
+	public void user_opens_the_application() {
+		System.setProperty("webdriver.chrome.driver","C:\\NexGen Testing Stream NEW\\Chrome Driver\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.get("http://10.232.237.143:443/TestMeApp/fetchcat.htm");
+	
+	  
+	}
+
+	@When("user click on signin link")
+	public void user_click_on_signin_link() {
+		driver.findElement(By.xpath("//*[@id=\"header\"]/div[1]/div/div/div[2]/div/ul/li[1]/a")).click();
+	   
+	}
+
+	@When("user enters {string} and {string}")
+	public void user_enters_and(String username, String password) {
+		  driver.findElement(By.id("userName")).sendKeys(username);
+		  driver.findElement(By.id("password")).sendKeys(password);
+		  driver.findElement(By.name("Login")).click();
+		  driver.findElement(By.linkText("SignOut")).click();
+		  driver.close();
+		
+	   
+	}
+
+	@Then("message displayed login successfully")
+	public void message_displayed_login_successfully() {
+	System.out.println("Login successful");
+		
+	  
+	}
+}
+--------------------------------------------------------------------------------------------------------------------------------------
+casestudy3----cucumber.java
+
+package CaseStudy;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class Casestudy3 {
+	WebDriver driver;
+	@Given("user logins with valid credentials")
+	public void user_logins_with_valid_credentials() {
+		System.setProperty("webdriver.chrome.driver","C:\\NexGen Testing Stream NEW\\Chrome Driver\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.get("http://10.232.237.143:443/TestMeApp/login.htm");
+		  driver.findElement(By.id("userName")).sendKeys("lalitha");
+		  driver.findElement(By.id("password")).sendKeys("password123");
+		  driver.findElement(By.name("Login")).click();
+		
+	}
+
+	@When("user enters the product to be searched and selects it")
+	public void user_enters_the_product_to_be_searched_and_selects_it() {
+		  Actions act = new Actions(driver);
+		  WebElement find=driver.findElement(By.id("myInput"));
+		  act.sendKeys(find,"h").pause(1000).sendKeys("e").pause(1000).sendKeys("a").pause(1000).sendKeys("d").build().perform();
+		  act.moveToElement(driver.findElement(By.xpath("//div[contains(text(),'Headphone')]"))).
+		  click().build().perform();
+	}
+
+	@When("user clicks on find details and  adds the product to cart")
+	public void user_clicks_on_find_details_and_adds_the_product_to_cart() {
+		 driver.findElement(By.xpath("//input[@type='submit']")).click();
+		 driver.findElement(By.xpath("/html/body/section/div/div/div[2]/div/div/div/div[2]/center/a")).click();  
+
+	}
+
+	@When("user goes to cart and clicks on checkout")
+	public void user_goes_to_cart_and_clicks_on_checkout() {
+		driver.findElement(By.xpath("//*[@id=\"header\"]/div[1]/div/div/div[2]/div/a[2]")).click();
+		
+		  driver.findElement(By.xpath("//*[@id=\"cart\"]/tfoot/tr[2]/td[5]/a")).click();
+	}
+
+	@When("user clicks on  proceeds to pay")
+	public void user_clicks_on_proceeds_to_pay() {
+		  driver.findElement(By.xpath("/html/body/b/div/div/div[1]/div/div[2]/div[3]/div/form[2]/input")).click();
+	}
+
+	@When("user selects Andhra Bank and clicks on continue")
+	public void user_selects_Andhra_Bank_and_clicks_on_continue() {
+		 WebDriverWait wait = new WebDriverWait(driver,10);
+		  wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//label[contains(text(),'Andhra Bank')]"))).click();
+		  driver.findElement(By.xpath("//label[contains(text(),'Andhra Bank')]")).click();
+		  driver.findElement(By.xpath("//*[@id=\"btn\"]")).click(); 
+	}
+
+	@When("user login using his bank credentials")
+	public void user_login_using_his_bank_credentials() {
+		  driver.findElement(By.xpath("//input[@type='text' and @name='username']")).sendKeys("123456");
+		  driver.findElement(By.xpath("//input[@type='password' and @name='password']")).sendKeys("Pass@456");
+		  driver.findElement(By.xpath("//input[@type='submit' and @value='LOGIN']")).click();
+	}
+
+	@When("user enters his transaction password")
+	public void user_enters_his_transaction_password() {
+		  driver.findElement(By.xpath("//input[@type='password' and @value='PASSWORD']")).sendKeys("Trans@456");
+		  driver.findElement(By.xpath("//input[@type='submit' and @value='PayNow']")).click();
+	}
+
+	@Then("user should b directed to order details  page")
+	public void user_should_b_directed_to_order_details_page() {
+		System.out.println("The page title is"+driver.getTitle());
+	}
+
+}
+--------------------------------------------------------------------------------------------------------------------------------
+casestudy4---cucumber.java
+
+package CaseStudy;
+
+import org.junit.Assert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+
+public class Casestudy4 {
+	WebDriver driver;
+	
+	@Given("Alex has registered  to TestMe app")
+	public void alex_has_registered_to_TestMe_app() {
+		System.setProperty("webdriver.chrome.driver","C:\\NexGen Testing Stream NEW\\Chrome Driver\\chromedriver.exe");
+		driver=new ChromeDriver();
+		driver.get("http://10.232.237.143:443/TestMeApp/login.htm");
+		  driver.findElement(By.id("userName")).sendKeys("lalitha");
+		  driver.findElement(By.id("password")).sendKeys("password123");
+		  driver.findElement(By.name("Login")).click();
+		
+	}
+
+	@When("Alex search a particular product like headphone")
+	public void alex_search_a_particular_product_like_headphone() {
+		 driver.findElement(By.id("myInput")).sendKeys("headphone");
+		 driver.findElement(By.xpath("//input[@value='FIND DETAILS']")).click();
+	}
+
+	@When("Try to proceed to payment without adding to cart")
+	public void try_to_proceed_to_payment_without_adding_to_cart() {
+		
+		    driver.findElement(By.xpath("//a[contains(text(),' Add to cart')]")).click();
+			//Assert.assertEquals(driver.findElement(By.xpath("//a[contains(text(),' Cart\r\n" + 
+			//		"									')]")).getText(), "Cart");
+			
+			System.out.println(driver.findElement(By.partialLinkText("Cart")).getText());
+		}
+				
+	
+
+	@Then("TestMe app doesnot display the cart icon")
+	public void testme_app_doesnot_display_the_cart_icon() {
+	  // Assert.assertTrue(!cartAvailable);
+	  System.out.println("it does not display cart icon");
+	}
+}
